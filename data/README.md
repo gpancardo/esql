@@ -1,0 +1,142 @@
+---
+language:
+- es
+license: cc-by-4.0
+tags:
+- sql
+- excel
+- spanish
+- code-generation
+- excel-formulas
+- sqlite
+- mysql
+- data-types
+task_categories:
+- text2text-generation
+pretty_name: ESQL
+size_categories:
+- 1K<n<10K
+viewer: false
+---
+
+# ESQL
+
+A Spanish-language dataset for translating natural language instructions into
+structured outputs: **Excel formulas**, **SQL queries** (SQLite and MySQL
+dialects), and **data type definitions**.
+
+Each entry contains a user-style natural language prompt (`instruction` +
+`input`) and the expected formula, query, or type definition (`output`). The
+`task` field selects the target domain:
+
+| task    | Description                           | Example output                    |
+|---------|---------------------------------------|-----------------------------------|
+| `excel` | Spanish Excel formulas                | `=SUMAR.SI(B:B;">5000")`         |
+| `sqlite` | SQLite dialect queries                | `SELECT * FROM t WHERE x > 1;`   |
+| `mysql` | MySQL dialect queries                 | `` SELECT * FROM `t` WHERE `x` > 1; `` |
+| `types` | Column → data type inference          | `id INTEGER\nnombre TEXT\n...`    |
+
+## Dataset Structure
+
+### Data Fields
+
+- **task** (`string`): Target domain — one of `excel`, `sqlite`, `mysql`, `types`.
+- **instruction** (`string`): Short description of what the user wants to accomplish.
+- **input** (`string`): Natural language request with specific details (column
+  names, table names, conditions, etc.).
+- **output** (`string`): The expected Excel formula, SQL query, or data type
+  specification.
+
+### Data Splits
+
+| Split | Approx. share | Stratification       |
+|-------|---------------|----------------------|
+| Train | 80 %          | Per-task stratified  |
+| Val   | 10 %          | Per-task stratified  |
+| Test  | 10 %          | Per-task stratified  |
+
+Exact split sizes and per-task distributions are recorded in `metrics.json`.
+
+### Data Instances
+
+```
+{"task": "excel", "instruction": "Fórmula para sumar ventas condicionales", "input": "Necesito sumar solo las ventas que superaron los 5000 euros en la columna B.", "output": "=SUMAR.SI(B:B;\">5000\")"}
+{"task": "sqlite", "instruction": "Consulta para pedidos recientes", "input": "Obtén los pedidos de los últimos 7 días. Usa la tabla 'pedidos'.", "output": "SELECT * FROM pedidos WHERE fecha >= date('now', '-7 days');"}
+{"task": "mysql", "instruction": "Seleccionar clientes activos", "input": "Necesito listar todos los clientes que están activos, de la tabla clientes.", "output": "SELECT * FROM `clientes` WHERE `activo` = 1;"}
+{"task": "types", "instruction": "Inferir tipos de datos de columnas", "input": "Tengo estas columnas: id, nombre, fecha_alta, sueldo, departamento. ¿Qué tipos deberían tener?", "output": "id INTEGER\nnombre TEXT\nfecha_alta DATE\nsueldo DECIMAL(10,2)\ndepartamento VARCHAR(255)"}
+```
+
+## Usage
+
+```python
+from datasets import load_dataset
+
+dataset = load_dataset("username/esql")
+
+# Access splits
+train = dataset["train"]   # ~80 %
+val   = dataset["val"]     # ~10 %
+test  = dataset["test"]    # ~10 %
+
+# Iterate
+for row in train:
+    print(f"[{row['task']}] {row['instruction']}")
+```
+
+Each split is a JSONL file (`train.jsonl`, `val.jsonl`, `test.jsonl`). You can
+also load them directly without the `datasets` library.
+
+## Preprocessing
+
+The raw data (`main.jsonl`) was cleaned by:
+
+1. Fixing malformed JSON lines.
+2. Removing exact duplicates.
+3. Removing entries with null or empty required fields.
+4. Splitting 80-10-10 stratified by task type (seed = 42).
+
+The full cleaning + split pipeline is reproducible via:
+
+```bash
+cd data
+python prepare.py
+```
+
+## Metrics
+
+Run `python metrics.py` to regenerate `metrics.json` with per-split statistics:
+entry counts, task distributions, character/word length summaries (min, max,
+mean, median, P5, P95), and vocabulary size.
+
+## Intended Use
+
+This dataset is intended for fine-tuning or evaluating language models on
+Spanish-to-structured-output tasks. Use cases include:
+
+- Translating Spanish natural language into Excel formulas.
+- Generating SQL queries (SQLite / MySQL) from Spanish prompts.
+- Inferring data types for database column specifications.
+
+## Limitations
+
+- The dataset only covers Spanish; outputs will reflect that language's
+  function names (e.g., Excel functions use Spanish names like `SUMAR.SI`
+  instead of `SUMIF`).
+- SQL queries are syntactically valid examples but may not always represent
+  semantically optimal queries for every schema.
+
+## Citation
+
+```bibtex
+@dataset{esql,
+  title     = {{ESQL}: Spanish structured-output dataset (Excel, SQL, data types)},
+  author    = {},
+  year      = {},
+  note      = {},
+  url       = {}
+}
+```
+
+## License
+
+Creative Commons Attribution 4.0 International (CC-BY-4.0).

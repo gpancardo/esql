@@ -1,0 +1,219 @@
+{
+  "train": {
+    "num_entries": 2275,
+    "task_distribution": {
+      "excel": 626,
+      "sqlite": 586,
+      "mysql": 557,
+      "types": 506
+    },
+    "instruction_char_length": {
+      "count": 2275,
+      "min": 11,
+      "max": 100,
+      "mean": 40.7,
+      "median": 39,
+      "p5": 20,
+      "p95": 69
+    },
+    "instruction_word_length": {
+      "count": 2275,
+      "min": 2,
+      "max": 18,
+      "mean": 6.4,
+      "median": 6,
+      "p5": 3,
+      "p95": 11
+    },
+    "input_char_length": {
+      "count": 2275,
+      "min": 32,
+      "max": 212,
+      "mean": 81.0,
+      "median": 79,
+      "p5": 51,
+      "p95": 118
+    },
+    "input_word_length": {
+      "count": 2275,
+      "min": 5,
+      "max": 41,
+      "mean": 12.3,
+      "median": 12,
+      "p5": 7,
+      "p95": 19
+    },
+    "output_char_length": {
+      "count": 2275,
+      "min": 4,
+      "max": 1029,
+      "mean": 97.6,
+      "median": 95,
+      "p5": 13,
+      "p95": 222
+    },
+    "output_word_length": {
+      "count": 2275,
+      "min": 1,
+      "max": 116,
+      "mean": 11.6,
+      "median": 12,
+      "p5": 1,
+      "p95": 29
+    }
+  },
+  "val": {
+    "num_entries": 284,
+    "task_distribution": {
+      "types": 63,
+      "sqlite": 73,
+      "excel": 78,
+      "mysql": 70
+    },
+    "instruction_char_length": {
+      "count": 284,
+      "min": 14,
+      "max": 104,
+      "mean": 40.8,
+      "median": 39,
+      "p5": 22,
+      "p95": 69
+    },
+    "instruction_word_length": {
+      "count": 284,
+      "min": 2,
+      "max": 17,
+      "mean": 6.4,
+      "median": 6,
+      "p5": 3,
+      "p95": 10
+    },
+    "input_char_length": {
+      "count": 284,
+      "min": 35,
+      "max": 176,
+      "mean": 83.0,
+      "median": 80,
+      "p5": 53,
+      "p95": 123
+    },
+    "input_word_length": {
+      "count": 284,
+      "min": 5,
+      "max": 35,
+      "mean": 12.6,
+      "median": 12,
+      "p5": 7,
+      "p95": 20
+    },
+    "output_char_length": {
+      "count": 284,
+      "min": 4,
+      "max": 514,
+      "mean": 94.8,
+      "median": 95,
+      "p5": 14,
+      "p95": 188
+    },
+    "output_word_length": {
+      "count": 284,
+      "min": 1,
+      "max": 59,
+      "mean": 11.2,
+      "median": 12,
+      "p5": 1,
+      "p95": 27
+    }
+  },
+  "test": {
+    "num_entries": 285,
+    "task_distribution": {
+      "types": 64,
+      "sqlite": 74,
+      "excel": 78,
+      "mysql": 69
+    },
+    "instruction_char_length": {
+      "count": 285,
+      "min": 12,
+      "max": 89,
+      "mean": 41.4,
+      "median": 40,
+      "p5": 19,
+      "p95": 71
+    },
+    "instruction_word_length": {
+      "count": 285,
+      "min": 2,
+      "max": 16,
+      "mean": 6.5,
+      "median": 6,
+      "p5": 3,
+      "p95": 10
+    },
+    "input_char_length": {
+      "count": 285,
+      "min": 31,
+      "max": 193,
+      "mean": 81.2,
+      "median": 81,
+      "p5": 52,
+      "p95": 115
+    },
+    "input_word_length": {
+      "count": 285,
+      "min": 4,
+      "max": 31,
+      "mean": 12.3,
+      "median": 12,
+      "p5": 7,
+      "p95": 19
+    },
+    "output_char_length": {
+      "count": 285,
+      "min": 6,
+      "max": 441,
+      "mean": 92.7,
+      "median": 91,
+      "p5": 15,
+      "p95": 186
+    },
+    "output_word_length": {
+      "count": 285,
+      "min": 1,
+      "max": 59,
+      "mean": 10.8,
+      "median": 11,
+      "p5": 1,
+      "p95": 25
+    }
+  },
+  "overall": {
+    "total_entries": 2844,
+    "task_distribution": {
+      "excel": 782,
+      "sqlite": 733,
+      "mysql": 696,
+      "types": 633
+    },
+    "task_distribution_pct": {
+      "excel": 27.5,
+      "sqlite": 25.8,
+      "mysql": 24.5,
+      "types": 22.3
+    },
+    "unique_tasks": 4,
+    "total_tasks": 2844,
+    "unique_instructions": 2640,
+    "total_instructions": 2844,
+    "unique_inputs": 2836,
+    "total_inputs": 2844,
+    "unique_outputs": 2777,
+    "total_outputs": 2844
+  },
+  "vocabulary": {
+    "total_words": 86045,
+    "unique_words": 13308,
+    "unique_words_lowercase": 13003
+  }
+}
